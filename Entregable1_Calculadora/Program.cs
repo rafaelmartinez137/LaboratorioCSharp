@@ -23,6 +23,8 @@ namespace Entregable1_Calculadora
 
                 switch (opcion)
                 {
+                    case "1": RealizarOperacion("suma"); break;
+                    case "2": RealizarOperacion("resta"); break;
                     case "5":
                         continuar = false;
                         break;
@@ -49,6 +51,37 @@ namespace Entregable1_Calculadora
             Console.WriteLine("4. Dividir");
             Console.WriteLine("5. Salir");
             Console.Write("\nSeleccione una opción: ");
+        }
+
+        // Solicita un número y repite hasta que la entrada sea válida
+        static double LeerNumero(string mensaje)
+        {
+            Console.Write(mensaje);
+            double numero;
+            while (!double.TryParse(Console.ReadLine(), out numero))
+            {
+                Console.Write(" Por favor, ingrese un número válido: ");
+            }
+            return numero;
+        }
+
+        static void RealizarOperacion(string operacion)
+        {
+            Console.WriteLine($"\n--- OPERACIÓN: {operacion.ToUpper()} ---");
+
+            double numero1 = LeerNumero("Ingrese el primer número: ");
+            double numero2 = LeerNumero("Ingrese el segundo número: ");
+
+            switch (operacion)
+            {
+                case "suma":
+                    Console.WriteLine($"\n Resultado: {numero1} + {numero2} = {numero1 + numero2}");
+                    break;
+
+                case "resta":
+                    Console.WriteLine($"\n Resultado: {numero1} - {numero2} = {numero1 - numero2}");
+                    break;
+            }
         }
     }
 }
