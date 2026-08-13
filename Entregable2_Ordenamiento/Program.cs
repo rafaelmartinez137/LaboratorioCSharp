@@ -47,6 +47,8 @@ namespace Entregable2_Ordenamiento
 
                 switch (opcion)
                 {
+                    case "1": MostrarMayorMenor(numeros); break;
+                    case "2": CalcularPromedio(numeros); break;
                     case "6": MostrarNumeros(numeros); break;
                     case "7":
                         continuar = false;
@@ -69,9 +71,56 @@ namespace Entregable2_Ordenamiento
         static void MostrarMenu()
         {
             Console.WriteLine("\n--- MENÚ DE ANÁLISIS ---");
+            Console.WriteLine("1. Mostrar número mayor y menor");
+            Console.WriteLine("2. Calcular promedio");
             Console.WriteLine("6. Mostrar todos los números");
             Console.WriteLine("7. Salir");
             Console.Write("\nSeleccione una opción: ");
+        }
+
+        static void MostrarMayorMenor(List<int> numeros)
+        {
+            Console.WriteLine("\n--- NÚMERO MAYOR Y MENOR ---");
+
+            if (numeros.Count == 0)
+            {
+                Console.WriteLine(" La lista está vacía.");
+                return;
+            }
+
+            int mayor = numeros[0];
+            int menor = numeros[0];
+            foreach (int numero in numeros)
+            {
+                if (numero > mayor) mayor = numero;
+                if (numero < menor) menor = numero;
+            }
+
+            Console.WriteLine($"Número mayor: {mayor}");
+            Console.WriteLine($"Número menor: {menor}");
+            Console.WriteLine($"Diferencia (rango): {mayor - menor}");
+        }
+
+        static void CalcularPromedio(List<int> numeros)
+        {
+            Console.WriteLine("\n--- PROMEDIO ---");
+
+            if (numeros.Count == 0)
+            {
+                Console.WriteLine(" La lista está vacía.");
+                return;
+            }
+
+            int suma = 0;
+            foreach (int numero in numeros)
+            {
+                suma += numero;
+            }
+
+            double promedio = (double)suma / numeros.Count;
+            Console.WriteLine($"Suma total: {suma}");
+            Console.WriteLine($"Cantidad de números: {numeros.Count}");
+            Console.WriteLine($"Promedio: {promedio:F2}");
         }
 
         static void MostrarNumeros(List<int> numeros)
