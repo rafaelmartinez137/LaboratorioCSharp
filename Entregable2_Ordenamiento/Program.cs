@@ -14,10 +14,10 @@ namespace Entregable2_Ordenamiento
             List<int> numeros = new List<int>();
             bool continuar = true;
 
-            Console.WriteLine("╔══════════════════════════════════════════╗");
+         Console.WriteLine("╔══════════════════════════════════════════╗");
             Console.WriteLine("║   ANÁLISIS DE NÚMEROS - NET              ║");
-            Console.WriteLine("║ Entregable 2 - Ordenamiento - Rafael Martinez ║");
-            Console.WriteLine("╚══════════════════════════════════════════╝");
+         Console.WriteLine("║ Entregable 2 - Ordenamiento - Rafael Martinez ║");
+        Console.WriteLine("╚══════════════════════════════════════════╝");
             Console.WriteLine();
 
             int cantidad;
@@ -26,7 +26,7 @@ namespace Entregable2_Ordenamiento
                 Console.Write("¿Cuántos números desea ingresar? ");
             } while (!int.TryParse(Console.ReadLine(), out cantidad) || cantidad <= 0);
 
-            Console.WriteLine($"\nIngrese {cantidad} números uno por uno:");
+               Console.WriteLine($"\nIngrese {cantidad} números uno por uno:");
             for (int i = 0; i < cantidad; i++)
             {
                 Console.Write($"Número {i + 1}: ");
@@ -50,8 +50,9 @@ namespace Entregable2_Ordenamiento
                     case "1": MostrarMayorMenor(numeros); break;
                     case "2": CalcularPromedio(numeros); break;
                     case "3": Ordenar(numeros, ascendente: true); break;
-                    case "4": Ordenar(numeros, ascendente: false); break;
-                    case "6": MostrarNumeros(numeros); break;
+                     case "4": Ordenar(numeros, ascendente: false); break;
+                    case "5": BuscarNumero(numeros); break;
+                     case "6": MostrarNumeros(numeros); break;
                     case "7":
                         continuar = false;
                         Console.WriteLine("\n Hasta pronto ");
@@ -64,7 +65,7 @@ namespace Entregable2_Ordenamiento
                 if (continuar)
                 {
                     Console.WriteLine("\nPresione cualquier tecla para continuar...");
-                    Console.ReadKey();
+                     Console.ReadKey();
                     Console.Clear();
                 }
             }
@@ -75,9 +76,10 @@ namespace Entregable2_Ordenamiento
             Console.WriteLine("\n--- MENÚ DE ANÁLISIS ---");
             Console.WriteLine("1. Mostrar número mayor y menor");
             Console.WriteLine("2. Calcular promedio");
-            Console.WriteLine("3. Ordenar ascendente");
+             Console.WriteLine("3. Ordenar ascendente");
             Console.WriteLine("4. Ordenar descendente");
-            Console.WriteLine("6. Mostrar todos los números");
+            Console.WriteLine("5. Buscar un número");
+             Console.WriteLine("6. Mostrar todos los números");
             Console.WriteLine("7. Salir");
             Console.Write("\nSeleccione una opción: ");
         }
@@ -101,7 +103,7 @@ namespace Entregable2_Ordenamiento
             }
 
             Console.WriteLine($"Número mayor: {mayor}");
-            Console.WriteLine($"Número menor: {menor}");
+             Console.WriteLine($"Número menor: {menor}");
             Console.WriteLine($"Diferencia (rango): {mayor - menor}");
         }
 
@@ -123,7 +125,7 @@ namespace Entregable2_Ordenamiento
 
             double promedio = (double)suma / numeros.Count;
             Console.WriteLine($"Suma total: {suma}");
-            Console.WriteLine($"Cantidad de números: {numeros.Count}");
+             Console.WriteLine($"Cantidad de números: {numeros.Count}");
             Console.WriteLine($"Promedio: {promedio:F2}");
         }
 
@@ -143,6 +145,40 @@ namespace Entregable2_Ordenamiento
             if (!ascendente) copia.Reverse();
 
             Console.WriteLine($"Resultado: {string.Join(", ", copia)}");
+        }
+
+        // Búsqueda lineal: recorre la lista comparando cada elemento
+        static void BuscarNumero(List<int> numeros)
+        {
+            Console.WriteLine("\n--- BÚSQUEDA DE NÚMERO ---");
+
+            if (numeros.Count == 0)
+            {
+                Console.WriteLine(" La lista está vacía.");
+                return;
+            }
+
+            Console.Write("Ingrese el número a buscar: ");
+            if (!int.TryParse(Console.ReadLine(), out int busqueda))
+            {
+                Console.WriteLine(" Por favor, ingrese un número entero válido.");
+                return;
+            }
+
+            bool encontrado = false;
+            for (int i = 0; i < numeros.Count; i++)
+            {
+                if (numeros[i] == busqueda)
+                {
+                    Console.WriteLine($" Número {busqueda} encontrado en la posición {i + 1}");
+                    encontrado = true;
+                }
+            }
+
+            if (!encontrado)
+            {
+                Console.WriteLine($" El número {busqueda} no se encuentra en la lista.");
+            }
         }
 
         static void MostrarNumeros(List<int> numeros)
