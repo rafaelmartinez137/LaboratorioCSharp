@@ -49,6 +49,8 @@ namespace Entregable2_Ordenamiento
                 {
                     case "1": MostrarMayorMenor(numeros); break;
                     case "2": CalcularPromedio(numeros); break;
+                    case "3": Ordenar(numeros, ascendente: true); break;
+                    case "4": Ordenar(numeros, ascendente: false); break;
                     case "6": MostrarNumeros(numeros); break;
                     case "7":
                         continuar = false;
@@ -73,6 +75,8 @@ namespace Entregable2_Ordenamiento
             Console.WriteLine("\n--- MENÚ DE ANÁLISIS ---");
             Console.WriteLine("1. Mostrar número mayor y menor");
             Console.WriteLine("2. Calcular promedio");
+            Console.WriteLine("3. Ordenar ascendente");
+            Console.WriteLine("4. Ordenar descendente");
             Console.WriteLine("6. Mostrar todos los números");
             Console.WriteLine("7. Salir");
             Console.Write("\nSeleccione una opción: ");
@@ -121,6 +125,24 @@ namespace Entregable2_Ordenamiento
             Console.WriteLine($"Suma total: {suma}");
             Console.WriteLine($"Cantidad de números: {numeros.Count}");
             Console.WriteLine($"Promedio: {promedio:F2}");
+        }
+
+        // Ordena una copia de la lista para no modificar la original
+        static void Ordenar(List<int> numeros, bool ascendente)
+        {
+            Console.WriteLine(ascendente ? "\n--- ORDEN ASCENDENTE ---" : "\n--- ORDEN DESCENDENTE ---");
+
+            if (numeros.Count == 0)
+            {
+                Console.WriteLine(" La lista está vacía.");
+                return;
+            }
+
+            List<int> copia = numeros.ToList();
+            copia.Sort();
+            if (!ascendente) copia.Reverse();
+
+            Console.WriteLine($"Resultado: {string.Join(", ", copia)}");
         }
 
         static void MostrarNumeros(List<int> numeros)
