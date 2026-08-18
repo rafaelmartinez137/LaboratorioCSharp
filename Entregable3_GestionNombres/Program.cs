@@ -29,6 +29,7 @@ namespace Entregable3_GestionNombres
                 {
                     case "1": AgregarNombre(teamMembers); break;
                     case "2": EliminarNombre(teamMembers); break;
+                    case "3": BuscarNombre(teamMembers); break;
                     case "6":
                         continuar = false;
                         Console.WriteLine("\n Hasta pronto Gestión de Team Members cerrada.");
@@ -52,6 +53,7 @@ namespace Entregable3_GestionNombres
             Console.WriteLine("\n--- MENÚ DE GESTIÓN ---");
             Console.WriteLine("1. Agregar nombre");
             Console.WriteLine("2. Eliminar nombre");
+            Console.WriteLine("3. Buscar nombre");
             Console.WriteLine("6. Salir");
             Console.Write("\nSeleccione una opción: ");
         }
@@ -106,6 +108,52 @@ namespace Entregable3_GestionNombres
             else
             {
                 Console.WriteLine($" El nombre '{nombre}' no se encuentra en la lista.");
+            }
+        }
+
+        static void BuscarNombre(List<string> teamMembers)
+        {
+            Console.WriteLine("\n--- BUSCAR NOMBRE ---");
+
+            if (teamMembers.Count == 0)
+            {
+                Console.WriteLine(" La lista está vacía.");
+                return;
+            }
+
+            Console.Write("Ingrese el nombre a buscar: ");
+            string busqueda = Console.ReadLine()?.Trim() ?? "";
+
+            if (string.IsNullOrWhiteSpace(busqueda))
+            {
+                Console.WriteLine(" Por favor, ingrese un nombre válido.");
+                return;
+            }
+
+            if (teamMembers.Contains(busqueda))
+            {
+                int posicion = teamMembers.IndexOf(busqueda);
+                Console.WriteLine($" '{busqueda}' encontrado en la posición {posicion + 1}");
+            }
+            else
+            {
+                Console.WriteLine($" '{busqueda}' no se encuentra en la lista.");
+
+                // Búsqueda parcial ignorando mayúsculas/minúsculas
+                Console.WriteLine("\n Quizás buscaba alguno de estos nombres?");
+                var coincidencias = teamMembers.Where(m => m.ToLower().Contains(busqueda.ToLower())).ToList();
+
+                if (coincidencias.Count > 0)
+                {
+                    foreach (string miembro in coincidencias)
+                    {
+                        Console.WriteLine($"  - {miembro}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("  No se encontraron coincidencias.");
+                }
             }
         }
     }
