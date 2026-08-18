@@ -28,6 +28,7 @@ namespace Entregable3_GestionNombres
                 switch (opcion)
                 {
                     case "1": AgregarNombre(teamMembers); break;
+                    case "2": EliminarNombre(teamMembers); break;
                     case "6":
                         continuar = false;
                         Console.WriteLine("\n Hasta pronto Gestión de Team Members cerrada.");
@@ -50,6 +51,7 @@ namespace Entregable3_GestionNombres
         {
             Console.WriteLine("\n--- MENÚ DE GESTIÓN ---");
             Console.WriteLine("1. Agregar nombre");
+            Console.WriteLine("2. Eliminar nombre");
             Console.WriteLine("6. Salir");
             Console.Write("\nSeleccione una opción: ");
         }
@@ -75,6 +77,36 @@ namespace Entregable3_GestionNombres
             teamMembers.Add(nombre);
             Console.WriteLine($" '{nombre}' agregado exitosamente.");
             Console.WriteLine($"  Total de miembros: {teamMembers.Count}");
+        }
+
+        static void EliminarNombre(List<string> teamMembers)
+        {
+            Console.WriteLine("\n--- ELIMINAR NOMBRE ---");
+
+            if (teamMembers.Count == 0)
+            {
+                Console.WriteLine(" La lista está vacía. No hay nombres para eliminar.");
+                return;
+            }
+
+            Console.Write("Ingrese el nombre a eliminar: ");
+            string nombre = Console.ReadLine()?.Trim() ?? "";
+
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                Console.WriteLine(" Por favor, ingrese un nombre válido.");
+                return;
+            }
+
+            if (teamMembers.Remove(nombre))
+            {
+                Console.WriteLine($" '{nombre}' eliminado exitosamente.");
+                Console.WriteLine($"  Total de miembros: {teamMembers.Count}");
+            }
+            else
+            {
+                Console.WriteLine($" El nombre '{nombre}' no se encuentra en la lista.");
+            }
         }
     }
 }
