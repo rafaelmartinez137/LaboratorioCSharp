@@ -14,10 +14,10 @@ namespace Entregable3_GestionNombres
             List<string> teamMembers = new List<string>();
             bool continuar = true;
 
-            Console.WriteLine("╔══════════════════════════════════════════╗");
+             Console.WriteLine("╔══════════════════════════════════════════╗");
             Console.WriteLine("║ GESTIÓN DE TEAM MEMBERS - NET SIMPLES    ║");
-            Console.WriteLine("║      Entregable 3 - List<T>              ║");
-            Console.WriteLine("╚══════════════════════════════════════════╝");
+         Console.WriteLine("║      Entregable 3 - List<T>  - Rafael Martinez      ║");
+             Console.WriteLine("╚══════════════════════════════════════════╝");
             Console.WriteLine();
 
             while (continuar)
@@ -29,7 +29,9 @@ namespace Entregable3_GestionNombres
                 {
                     case "1": AgregarNombre(teamMembers); break;
                     case "2": EliminarNombre(teamMembers); break;
-                    case "3": BuscarNombre(teamMembers); break;
+                     case "3": BuscarNombre(teamMembers); break;
+                    case "4": MostrarNombresOrdenados(teamMembers); break;
+                     case "5": MostrarCantidad(teamMembers); break;
                     case "6":
                         continuar = false;
                         Console.WriteLine("\n Hasta pronto Gestión de Team Members cerrada.");
@@ -51,9 +53,11 @@ namespace Entregable3_GestionNombres
         static void MostrarMenu()
         {
             Console.WriteLine("\n--- MENÚ DE GESTIÓN ---");
-            Console.WriteLine("1. Agregar nombre");
+             Console.WriteLine("1. Agregar nombre");
             Console.WriteLine("2. Eliminar nombre");
             Console.WriteLine("3. Buscar nombre");
+            Console.WriteLine("4. Mostrar nombres ordenados");
+             Console.WriteLine("5. Mostrar cantidad de miembros");
             Console.WriteLine("6. Salir");
             Console.Write("\nSeleccione una opción: ");
         }
@@ -102,7 +106,7 @@ namespace Entregable3_GestionNombres
 
             if (teamMembers.Remove(nombre))
             {
-                Console.WriteLine($" '{nombre}' eliminado exitosamente.");
+                 Console.WriteLine($" '{nombre}' eliminado exitosamente.");
                 Console.WriteLine($"  Total de miembros: {teamMembers.Count}");
             }
             else
@@ -122,9 +126,9 @@ namespace Entregable3_GestionNombres
             }
 
             Console.Write("Ingrese el nombre a buscar: ");
-            string busqueda = Console.ReadLine()?.Trim() ?? "";
+             string busqueda = Console.ReadLine()?.Trim() ?? "";
 
-            if (string.IsNullOrWhiteSpace(busqueda))
+              if (string.IsNullOrWhiteSpace(busqueda))
             {
                 Console.WriteLine(" Por favor, ingrese un nombre válido.");
                 return;
@@ -140,7 +144,7 @@ namespace Entregable3_GestionNombres
                 Console.WriteLine($" '{busqueda}' no se encuentra en la lista.");
 
                 // Búsqueda parcial ignorando mayúsculas/minúsculas
-                Console.WriteLine("\n Quizás buscaba alguno de estos nombres?");
+                 Console.WriteLine("\n Quizás buscaba alguno de estos nombres?");
                 var coincidencias = teamMembers.Where(m => m.ToLower().Contains(busqueda.ToLower())).ToList();
 
                 if (coincidencias.Count > 0)
@@ -154,6 +158,44 @@ namespace Entregable3_GestionNombres
                 {
                     Console.WriteLine("  No se encontraron coincidencias.");
                 }
+            }
+        }
+
+        static void MostrarNombresOrdenados(List<string> teamMembers)
+        {
+            Console.WriteLine("\n--- NOMBRES ORDENADOS ALFABÉTICAMENTE ---");
+
+            if (teamMembers.Count == 0)
+            {
+                Console.WriteLine("La lista está vacía.");
+                return;
+            }
+
+            List<string> ordenados = teamMembers.OrderBy(nombre => nombre).ToList();
+
+            Console.WriteLine($"Total de miembros: {ordenados.Count}\n");
+            for (int i = 0; i < ordenados.Count; i++)
+            {
+                Console.WriteLine($"  {i + 1}. {ordenados[i]}");
+            }
+        }
+
+        static void MostrarCantidad(List<string> teamMembers)
+        {
+            Console.WriteLine("\n--- CANTIDAD DE MIEMBROS ---");
+            Console.WriteLine($"Total de Team Members: {teamMembers.Count}");
+
+            if (teamMembers.Count == 0)
+            {
+                Console.WriteLine("  No hay miembros registrados.");
+            }
+            else if (teamMembers.Count == 1)
+            {
+                Console.WriteLine("  Hay 1 miembro registrado.");
+            }
+            else
+            {
+                Console.WriteLine($"  Hay {teamMembers.Count} miembros registrados.");
             }
         }
     }
