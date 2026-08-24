@@ -18,7 +18,7 @@ namespace Entregable4_ColaAtencion
             Console.WriteLine("║      Entregable 4 - Rafael Martinez        ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola! Bienvenido a la Cola de Atención.");
+            Console.WriteLine("¡Hola otra vez! La cola FIFO está lista para atender turnos.");
             Console.WriteLine();
 
             while (continuar)
@@ -32,9 +32,13 @@ namespace Entregable4_ColaAtencion
                         RegistrarPersona();
                         break;
                     case "2":
+                        AtenderPrimero();
+                        break;
                     case "3":
+                        MostrarPendientes();
+                        break;
                     case "4":
-                        Console.WriteLine("\n Función en desarrollo. Estará disponible en la próxima versión.");
+                        MostrarSiguiente();
                         break;
                     case "5":
                         continuar = false;
@@ -79,6 +83,51 @@ namespace Entregable4_ColaAtencion
 
             cola.Enqueue(nombre);
             Console.WriteLine($" \"{nombre}\" fue registrado en la cola. Posición asignada: {cola.Count}");
+        }
+
+        static void AtenderPrimero()
+        {
+            if (cola.Count == 0)
+            {
+                Console.WriteLine("\n No hay personas en la cola para atender.");
+                return;
+            }
+
+            string atendida = cola.Dequeue();
+            Console.WriteLine($"\n Atendiendo a: {atendida}");
+            Console.WriteLine($" La persona \"{atendida}\" salió de la cola (primera en llegar, primera en salir).");
+            Console.WriteLine($" Personas pendientes: {cola.Count}");
+        }
+
+        static void MostrarPendientes()
+        {
+            Console.WriteLine($"\n Personas pendientes en cola: {cola.Count}");
+
+            if (cola.Count > 0)
+            {
+                Console.WriteLine(" Orden de llegada:");
+                int posicion = 1;
+                foreach (string persona in cola)
+                {
+                    Console.WriteLine($"   {posicion}. {persona}");
+                    posicion++;
+                }
+            }
+            else
+            {
+                Console.WriteLine(" La cola está vacía.");
+            }
+        }
+
+        static void MostrarSiguiente()
+        {
+            if (cola.Count == 0)
+            {
+                Console.WriteLine("\n No hay nadie esperando para ser atendido.");
+                return;
+            }
+
+            Console.WriteLine($"\n Siguiente persona a ser atendida: {cola.Peek()}");
         }
     }
 }
