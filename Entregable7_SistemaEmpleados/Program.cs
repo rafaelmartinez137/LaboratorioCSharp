@@ -18,7 +18,7 @@ namespace Entregable7_SistemaEmpleados
             Console.WriteLine("║      Entregable 7 - Rafael Martinez        ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola! Bienvenido al Sistema de Empleados.");
+            Console.WriteLine("¡Hola equipo! Developer, TeamLeader y Manager ya calculan su propio bono.");
             Console.WriteLine();
 
             CargarEmpleados();
@@ -34,7 +34,7 @@ namespace Entregable7_SistemaEmpleados
                         MostrarEmpleados();
                         break;
                     case "2":
-                        Console.WriteLine("\n Función en desarrollo. Estará disponible en la próxima versión.");
+                        MostrarTotalBonos();
                         break;
                     case "3":
                         continuar = false;
@@ -59,6 +59,8 @@ namespace Entregable7_SistemaEmpleados
         {
             empleados.Add(new Developer("Ana Torres", 60000));
             empleados.Add(new Developer("Luis Gómez", 55000));
+            empleados.Add(new TeamLeader("Marcos Díaz", 70000));
+            empleados.Add(new Manager("Sofía Vargas", 90000));
             empleados.Add(new Empleado("Carla Ruíz", 40000));
             Console.WriteLine($" Se registraron {empleados.Count} empleados en el sistema.");
         }
@@ -85,6 +87,36 @@ namespace Entregable7_SistemaEmpleados
             {
                 empleado.MostrarInformacion();
             }
+        }
+
+        static void MostrarTotalBonos()
+        {
+            if (empleados.Count == 0)
+            {
+                Console.WriteLine("\n No hay empleados registrados.");
+                return;
+            }
+
+            decimal total = 0;
+            foreach (Empleado empleado in empleados)
+            {
+                total += empleado.CalcularBono();
+            }
+
+            Console.WriteLine($"\n Total de bonos a pagar a {empleados.Count} empleados: {total:C}");
+
+            decimal mayor = 0;
+            string mejorPagado = "";
+            foreach (Empleado empleado in empleados)
+            {
+                if (empleado.CalcularBono() > mayor)
+                {
+                    mayor = empleado.CalcularBono();
+                    mejorPagado = empleado.Nombre;
+                }
+            }
+
+            Console.WriteLine($" Mayor bono individual: {mejorPagado} con {mayor:C}");
         }
     }
 
@@ -132,6 +164,30 @@ namespace Entregable7_SistemaEmpleados
         public override decimal CalcularBono()
         {
             return Salario * 0.10m;
+        }
+    }
+
+    class TeamLeader : Empleado
+    {
+        public TeamLeader(string nombre, decimal salario) : base(nombre, salario)
+        {
+        }
+
+        public override decimal CalcularBono()
+        {
+            return Salario * 0.12m;
+        }
+    }
+
+    class Manager : Empleado
+    {
+        public Manager(string nombre, decimal salario) : base(nombre, salario)
+        {
+        }
+
+        public override decimal CalcularBono()
+        {
+            return Salario * 0.15m;
         }
     }
 }
