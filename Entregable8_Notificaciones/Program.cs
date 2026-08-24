@@ -10,7 +10,8 @@ namespace Entregable8_Notificaciones
         static List<INotificador> notificadores = new List<INotificador>
         {
             new EmailNotificador(),
-            new SmsNotificador()
+            new SmsNotificador(),
+            new TeamsNotificador()
         };
 
         static void Main(string[] args)
@@ -22,7 +23,7 @@ namespace Entregable8_Notificaciones
             Console.WriteLine("║   Entregable 8 - Rafael Martinez           ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola! Bienvenido al Centro de Notificaciones.");
+            Console.WriteLine("¡Hola otra vez! Email, SMS y Teams ya están conectados.");
             Console.WriteLine();
 
             while (continuar)
@@ -39,8 +40,10 @@ namespace Entregable8_Notificaciones
                         EnviarCon(BuscarNotificador("SMS"));
                         break;
                     case "3":
+                        EnviarCon(BuscarNotificador("Teams"));
+                        break;
                     case "4":
-                        Console.WriteLine("\n Función en desarrollo. Estará disponible en la próxima versión.");
+                        EnviarPorTodosLosCanales();
                         break;
                     case "5":
                         continuar = false;
@@ -97,6 +100,25 @@ namespace Entregable8_Notificaciones
             string mensaje = LeerTexto("Ingrese el mensaje a enviar: ");
 
             notificador.Enviar(destinatario, mensaje);
+        }
+
+        static void EnviarPorTodosLosCanales()
+        {
+            string destinatario = LeerTexto("Ingrese el destinatario: ");
+            string mensaje = LeerTexto("Ingrese el mensaje a enviar: ");
+
+            Console.WriteLine("\n Enviando por todos los canales disponibles...");
+            int enviados = 0;
+
+            foreach (INotificador notificador in notificadores)
+            {
+                if (notificador.Enviar(destinatario, mensaje))
+                {
+                    enviados++;
+                }
+            }
+
+            Console.WriteLine($"\n Resultado: {enviados} de {notificadores.Count} notificaciones enviadas.");
         }
 
         static string LeerTexto(string mensaje)
@@ -157,6 +179,26 @@ namespace Entregable8_Notificaciones
             Console.WriteLine($" Número       : {destinatario}");
             Console.WriteLine($" Mensaje      : {mensaje}");
             Console.WriteLine(" Estado       : Enviado correctamente.");
+            return true;
+        }
+    }
+
+    class TeamsNotificador : INotificador
+    {
+        public string Canal { get { return "Teams"; } }
+
+        public bool Enviar(string destinatario, string mensaje)
+        {
+            if (destinatario.Length < 3)
+            {
+                Console.WriteLine("\n Error: El usuario o canal de Teams no es válido.");
+                return false;
+            }
+
+            Console.WriteLine("\n ──── TEAMS ────");
+            Console.WriteLine($" Usuario/Canal: {destinatario}");
+            Console.WriteLine($" Mensaje      : {mensaje}");
+            Console.WriteLine(" Estado       : Entregado en el chat de Teams.");
             return true;
         }
     }
