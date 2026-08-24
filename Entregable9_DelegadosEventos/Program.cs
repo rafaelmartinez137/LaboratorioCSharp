@@ -9,6 +9,8 @@ namespace Entregable9_DelegadosEventos
     {
         static GestorOrdenes gestor = new GestorOrdenes();
         static List<Orden> ordenes = new List<Orden>();
+        static List<string> bitacora = new List<string>();
+        static ProcesadorMensaje procesadorActual = MostrarResumen;
 
         static void Main(string[] args)
         {
@@ -19,10 +21,11 @@ namespace Entregable9_DelegadosEventos
             Console.WriteLine("║   Entregable 9 - Rafael Martinez           ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola! El sistema de Órdenes está en línea.");
+            Console.WriteLine("¡Hola por última vez! Eventos y delegados en pleno funcionamiento.");
             Console.WriteLine();
 
             gestor.OrdenCreada += ProcesarMensaje;
+            gestor.OrdenCreada += GuardarEnBitacora;
 
             while (continuar)
             {
@@ -38,8 +41,10 @@ namespace Entregable9_DelegadosEventos
                         MostrarOrdenes();
                         break;
                     case "3":
+                        CambiarProcesador();
+                        break;
                     case "4":
-                        Console.WriteLine("\n Función en desarrollo. Estará disponible en la próxima versión.");
+                        MostrarBitacora();
                         break;
                     case "5":
                         continuar = false;
@@ -95,7 +100,56 @@ namespace Entregable9_DelegadosEventos
 
         static void ProcesarMensaje(string mensaje)
         {
+            procesadorActual(mensaje);
+        }
+
+        static void GuardarEnBitacora(string mensaje)
+        {
+            bitacora.Add($"[{DateTime.Now:HH:mm:ss}] {mensaje}");
+        }
+
+        static void CambiarProcesador()
+        {
+            if (procesadorActual == MostrarResumen)
+            {
+                procesadorActual = MostrarDetallado;
+                Console.WriteLine("\n Procesador cambiado a MODO DETALLADO.");
+                MostrarDetallado("(Vista de prueba del nuevo procesador)");
+            }
+            else
+            {
+                procesadorActual = MostrarResumen;
+                Console.WriteLine("\n Procesador cambiado a MODO RESUMEN.");
+                MostrarResumen("(Vista de prueba del nuevo procesador)");
+            }
+        }
+
+        static void MostrarResumen(string mensaje)
+        {
             Console.WriteLine($"\n [EVENTO] {mensaje}");
+        }
+
+        static void MostrarDetallado(string mensaje)
+        {
+            Console.WriteLine("\n ════════ EVENTO RECIBIDO ════════");
+            Console.WriteLine($"  Fecha y hora : {DateTime.Now:dd/MM/yyyy HH:mm:ss}");
+            Console.WriteLine($"  Detalle      : {mensaje}");
+            Console.WriteLine(" ═════════════════════════════════");
+        }
+
+        static void MostrarBitacora()
+        {
+            if (bitacora.Count == 0)
+            {
+                Console.WriteLine("\n La bitácora no tiene eventos registrados todavía.");
+                return;
+            }
+
+            Console.WriteLine($"\n Bitácora de eventos ({bitacora.Count} registros):");
+            foreach (string registro in bitacora)
+            {
+                Console.WriteLine($"   {registro}");
+            }
         }
 
         static string LeerTexto(string mensaje)
