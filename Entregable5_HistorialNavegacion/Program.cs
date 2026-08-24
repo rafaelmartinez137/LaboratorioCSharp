@@ -19,7 +19,7 @@ namespace Entregable5_HistorialNavegacion
             Console.WriteLine("║    Entregable 5 - Rafael Martinez          ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola! Bienvenido a tu Historial de Navegación.");
+            Console.WriteLine("¡Hola explorador! Navega con tu historial LIFO listo para usar.");
             Console.WriteLine();
 
             while (continuar)
@@ -33,9 +33,13 @@ namespace Entregable5_HistorialNavegacion
                         VisitarPagina();
                         break;
                     case "2":
+                        RetrocederPagina();
+                        break;
                     case "3":
+                        MostrarPaginaActual();
+                        break;
                     case "4":
-                        Console.WriteLine("\n Función en desarrollo. Estará disponible en la próxima versión.");
+                        MostrarHistorial();
                         break;
                     case "5":
                         continuar = false;
@@ -85,6 +89,46 @@ namespace Entregable5_HistorialNavegacion
 
             paginaActual = pagina;
             Console.WriteLine($"\n Navegando hacia: {paginaActual}");
+        }
+
+        static void RetrocederPagina()
+        {
+            if (historial.Count == 0)
+            {
+                Console.WriteLine("\n No hay páginas anteriores en el historial.");
+                return;
+            }
+
+            paginaActual = historial.Pop();
+            Console.WriteLine($"\n Retrocediendo a la página anterior: {paginaActual}");
+        }
+
+        static void MostrarPaginaActual()
+        {
+            if (paginaActual.Length == 0)
+            {
+                Console.WriteLine("\n Aún no se ha visitado ninguna página.");
+                return;
+            }
+
+            Console.WriteLine($"\n Página actual: {paginaActual}");
+        }
+
+        static void MostrarHistorial()
+        {
+            if (historial.Count == 0)
+            {
+                Console.WriteLine("\n El historial de navegación está vacío.");
+                return;
+            }
+
+            Console.WriteLine($"\n Páginas visitadas (de la más reciente a la más antigua): {historial.Count}");
+            int posicion = 1;
+            foreach (string pagina in historial)
+            {
+                Console.WriteLine($"   {posicion}. {pagina}");
+                posicion++;
+            }
         }
     }
 }
