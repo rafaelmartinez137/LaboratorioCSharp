@@ -21,7 +21,7 @@ namespace Entregable9_DelegadosEventos
             Console.WriteLine("║   Entregable 9 - Rafael Martinez           ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola por última vez! Eventos y delegados en pleno funcionamiento.");
+            Console.WriteLine("Hola  Eventos y delegados en pleno funcionamiento.");
             Console.WriteLine();
 
             gestor.OrdenCreada += ProcesarMensaje;

@@ -18,7 +18,7 @@ namespace Entregable6_DiccionarioProductos
             Console.WriteLine("║   Entregable 6 - Rafael Martinez           ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola de nuevo! Ahora con control total del stock del inventario.");
+            Console.WriteLine("Hola  Ahora con control total del stock del inventario.");
             Console.WriteLine();
 
             PrecargarProductos();
@@ -61,7 +61,7 @@ namespace Entregable6_DiccionarioProductos
                 }
             }
 
-            Console.WriteLine("\n¡Hasta luego! Gracias por usar el sistema de inventario.");
+            Console.WriteLine("\n Hasta luego Gracias por usar el sistema de inventario.");
         }
 
         static void PrecargarProductos()

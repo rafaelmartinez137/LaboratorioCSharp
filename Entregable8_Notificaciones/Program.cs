@@ -23,7 +23,7 @@ namespace Entregable8_Notificaciones
             Console.WriteLine("║   Entregable 8 - Rafael Martinez           ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola otra vez! Email, SMS y Teams ya están conectados.");
+            Console.WriteLine("Hola Email, SMS y Teams ya están conectados.");
             Console.WriteLine();
 
             while (continuar)

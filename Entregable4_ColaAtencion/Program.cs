@@ -18,7 +18,7 @@ namespace Entregable4_ColaAtencion
             Console.WriteLine("║      Entregable 4 - Rafael Martinez        ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola otra vez! La cola FIFO está lista para atender turnos.");
+            Console.WriteLine("Hola otra vez! La cola FIFO está lista para atender turnos.");
             Console.WriteLine();
 
             while (continuar)
@@ -94,7 +94,7 @@ namespace Entregable4_ColaAtencion
             }
 
             string atendida = cola.Dequeue();
-            Console.WriteLine($"\n Atendiendo a: {atendida}");
+             Console.WriteLine($"\n Atendiendo a: {atendida}");
             Console.WriteLine($" La persona \"{atendida}\" salió de la cola (primera en llegar, primera en salir).");
             Console.WriteLine($" Personas pendientes: {cola.Count}");
         }

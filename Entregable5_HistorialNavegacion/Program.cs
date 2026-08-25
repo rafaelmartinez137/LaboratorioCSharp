@@ -19,7 +19,7 @@ namespace Entregable5_HistorialNavegacion
             Console.WriteLine("║    Entregable 5 - Rafael Martinez          ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola explorador! Navega con tu historial LIFO listo para usar.");
+            Console.WriteLine("Hola explorador! Navega con tu historial LIFO listo para usar.");
             Console.WriteLine();
 
             while (continuar)

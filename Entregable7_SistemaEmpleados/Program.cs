@@ -18,7 +18,7 @@ namespace Entregable7_SistemaEmpleados
             Console.WriteLine("║      Entregable 7 - Rafael Martinez        ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine("¡Hola equipo! Developer, TeamLeader y Manager ya calculan su propio bono.");
+            Console.WriteLine("Hola Developer, TeamLeader y Manager ya calculan su propio bono.");
             Console.WriteLine();
 
             CargarEmpleados();
@@ -52,7 +52,7 @@ namespace Entregable7_SistemaEmpleados
                 }
             }
 
-            Console.WriteLine("\n¡Hasta luego! Gracias por usar el sistema de empleados.");
+            Console.WriteLine("\n Hasta luego Gracias por usar el sistema de empleados.");
         }
 
         static void CargarEmpleados()
